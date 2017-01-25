@@ -1,0 +1,1 @@
+# lab-basic-auth-laundry
