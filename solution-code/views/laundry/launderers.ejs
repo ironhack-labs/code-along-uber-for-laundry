@@ -1,0 +1,18 @@
+<h2> Find a launderer </h2>
+
+<ul>
+  <% launderers.forEach((oneUser) => { %>
+    <li>
+      <h3> <%= oneUser.name %> </h3>
+      <p> Fee: $<%= oneUser.fee %> </p>
+
+      <a href="/launderers/<%= oneUser._id %>">
+        Schedule a Pickup
+      </a>
+    </li>
+  <% }) %>
+</ul>
+
+<a href="/dashboard">
+  Back to Dashboard
+</a>
