@@ -1,36 +1,29 @@
 ![Ironhack Logo](https://i.imgur.com/1QgrNNw.png)
 
-# PP | Basic Auth with Uber For Laundry
+# Express | Code Along - Uber For Laundry
 
 ## Learning Goals
 - Add basic user authentication to an Express application.
 - Create sessions in an Express application.
-- Store user information in the session and use it in some routes. 
+- Store user information in the session and use it in some routes.
 - Prevent anonymous (logged out) users from accessing parts of your application.
 
 
-## Requirements
+## Setup
 
-- [Fork this repo](https://guides.github.com/activities/forking/)
-- Clone your fork into your `~/code/labs` folder.
+Clone [the Uber For Laundry repo](https://github.com/ironhack-labs/code-along-uber-for-laundry) into your `~/code/labs` folder to get the starter code.
 
-
-## Submission
-
-Upon completion, run the following commands
+```bash
+$ cd ~/code/labs
+$ git clone https://github.com/ironhack-labs/code-along-uber-for-laundry
+$ cd code-along-uber-for-laundry/
 ```
-$ git add .
-$ git commit -m "done"
-$ git push origin master
+
+Run `npm install` to get all the modules from the `package.json` file.
+
+```bash
+$ npm install
 ```
-Navigate to your repo and create a Pull Request -from your master branch to the original repository master branch.
-
-In the Pull request name, add your name, last names and campus city separated by hyphens `-`.
-
-
-## Deliverables
-
-All the files in the `starter-code/` folder that make your Express app work.
 
 
 ## Introduction
@@ -49,107 +42,58 @@ _Or do we?_
 
 What if we could make an app in which we could have **other people do our laundry** for us. No, that's not what your mother is for. I'm talking about strangers with a lot of time on their hands that want to make some extra money on the side. Regular people like you or me!
 
-Let's create an app solve the working professional's laundry problem using Express, bcrypt and sessions. Maybe we really _will_ become Uber for Laundry!
+Let's create an app to solve the working professional's laundry problem using Express, Mongoose, bcrypt and sessions. Maybe we really _will_ become Uber for Laundry!
 
 The app will allow users to register and schedule a laundry pickup. They will be able to:
 
-1. Register as a user.
-2. Login.
-3. Optionally become a launderer.
-4. See the list of launderers.
-5. Schedule a laundry pickup with a launderer.
-6. As launderers, see their pending pickups.
+1. Sign up as a user.
+2. Log in.
+3. Log out.
+4. Become a launderer (optional).
+5. Find a launderer.
+6. Schedule a laundry pickup with a launderer.
+7. See pending pickups.
 
 
 ### Starter Code
 
-Starter code breakdown
+The starter code for this project includes:
+
+1. An app structure created by the `express-generator`.
+2. Layout already added for you.
+3. Views for all the pages we are going to be working with.
+4. The `User` and `LaundryPickup` models.
 
 ```
 starter-code/
 ├── .gitignore
-└── ...
+├── app.js
+├── bin
+│   └── www
+├── models
+│   ├── laundry-pickup.js
+│   └── user.js
+├── package.json
+├── public
+│   └── stylesheets
+│       └── style.css
+├── routes
+│   ├── index.js
+│   └── users.js
+└── views
+    ├── auth
+    │   ├── login.ejs
+    │   └── signup.ejs
+    ├── error.ejs
+    ├── index.ejs
+    ├── laundry
+    │   ├── dashboard.ejs
+    │   ├── launderer-profile.ejs
+    │   └── launderers.ejs
+    └── layouts
+        └── main-layout.ejs
 ```
 
-Now that we know what we are starting with, let's get to coding!
+If you visit the homepage, you will see that there are a bunch of links that don't work. We will be adding the routes for each of those pages as part of this lesson.
 
-
-## Iteration #1: Register
-
-Registration
-
-### Steps to follow
-
-1. Register users.
-
-### Hints
-
-Bcrypt and stuff.
-
-
-## Iteration #2: Login
-
-Login
-
-### Steps to follow
-
-1. Log users in.
-
-### Hints
-
-Sessions and stuff.
-
-
-## Iteration #3: Become a launderer
-
-Make them launderers
-
-### Steps to follow
-
-1. Find a user and make them a launderer.
-
-### Hints
-
-Mongo and stuff.
-
-
-## Iteration #4: List launderers
-
-List all them launderers
-
-### Steps to follow
-
-1. Find all them launderers.
-
-### Hints
-
-Find queries and stuff.
-
-
-## Iteration #5: Schedule a laundry pickup
-
-Schedule a pickup
-
-### Steps to follow
-
-1. Make a new pickup.
-
-### Hints
-
-Models and stuff.
-
-
-## Iteration #6: Pending pickups
-
-Pickups are pending!
-
-### Steps to follow
-
-1. Query things.
-
-### Hints
-
-Queries and queries and stuff.
-
-
-# That's it!
+Let's get to coding!
