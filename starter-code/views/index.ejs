@@ -1,11 +1,19 @@
+<!-- views/index.ejs -->
 <p> Welcome to <%= title %>. </p>
+
+<% if (isUserLoggedIn) { %>
+  <p> Hello, <%= currentUserInfo.name %>. </p>
+<% } %>
 
 <nav>
   <ul>
-    <li> <a href="/signup"> Sign Up </a> </li>
-    <li> <a href="/login"> Log In </a> </li>
-    <li> <a href="/launderers"> Find a Launderer </a> </li>
-    <li> <a href="/dashboard"> See Dashboard </a> </li>
-    <li> <a href="/logout"> Log Out </a> </li>
+    <% if (!isUserLoggedIn) { %>
+      <li> <a href="/signup"> Sign Up </a> </li>
+      <li> <a href="/login"> Log In </a> </li>
+    <% } else { %>
+      <li> <a href="/launderers"> Find a Launderer </a> </li>
+      <li> <a href="/dashboard"> See Dashboard </a> </li>
+      <li> <a href="/logout"> Log Out </a> </li>
+    <% } %>
   </ul>
 </nav>
