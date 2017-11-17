@@ -4,11 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var index = require('./routes/index');
 const expressLayouts = require('express-ejs-layouts');
-
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require('mongoose');
 var index = require('./routes/index');
 var users = require('./routes/users');
+const authRoutes = require('./routes/auth');
+const laundryRoutes = require('./routes/laundry');
 
+mongoose.connect('mongodb://localhost/uberlaundry');
 var app = express();
 
 // view engine setup
@@ -26,15 +32,33 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'never do your own laundry again',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
+
+app.use((req, res, next) => {
+  if (req.session.currentUser) {
+    res.locals.currentUserInfo = req.session.currentUser;
+    res.locals.isUserLoggedIn = true;
+  } else {
+    res.locals.isUserLoggedIn = false;
+  }
+
+  next();
+});
+
+
 app.use('/', index);
 app.use('/users', users);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+app.use('/', authRoutes);
+app.use('/', laundryRoutes);
 
 // error handler
 app.use(function(err, req, res, next) {
