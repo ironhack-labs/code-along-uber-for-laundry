@@ -5,10 +5,23 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
+const mongoose = require("mongoose");
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-const authRoutes = require('./routes/auth');
+const auth = require('./routes/auth');
+
+// const dbUrl= 'mongodb://localhost/uberlaundry';
+// mongoose.connect(dbUrl).then(() => {
+//   debug(`Connected to DB: $(dbUrl)`);
+// });
+
+const dbURL = "mongodb://localhost/ironhack-trips";
+mongoose.connect(dbURL).then(() => {
+  debug(`Connected to DB: ${dbURL}`);
+});
 
 var app = express();
 
@@ -27,8 +40,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'you are wrong!!',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
+
+app.use((req, res, next) => {
+  if (req.session.currentUser) {
+    res.locals.currentUserInfo = req.session.currentUser;
+    res.locals.isUserLoggedIn = true;
+  } else {
+    res.locals.isUserLoggedIn = false;
+  }
+
+  next();
+});
+
 app.use('/', index);
-app.use('/', authRoutes);
+app.use('/', auth);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
