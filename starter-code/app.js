@@ -10,7 +10,6 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
 const index = require('./routes/index');
-const users = require('./routes/users');
 const authRoutes = require('./routes/auth');
 const laundryRoutes = require('./routes/laundry');
 
@@ -55,7 +54,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/', authRoutes);
 app.use('/', laundryRoutes);
 
