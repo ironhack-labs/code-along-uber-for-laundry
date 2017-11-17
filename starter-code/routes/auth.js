@@ -15,52 +15,41 @@ router.get('/signup', (req, res, next) => {
 });
 
 router.post('/signup', (req, res, next) => {
-  const nameInput = req.body.name;
-  const emailInput = req.body.email;
-  const passwordInput = req.body.password;
+  const {name, email, password} = req.body;
 
-  if (emailInput === '' || passwordInput === '') {
+  if (email === '' || password === '') {
     res.render('auth/signup', {
       errorMessage: 'Enter both email and password to sign up.'
     });
     return;
   }
 
-  User.findOne({ email: emailInput }, '_id', (err, existingUser) => {
-    if (err) {
-      next(err);
-      return;
-    }
-
-    if (existingUser !== null) {
-      res.render('auth/signup', {
-        errorMessage: `The email ${emailInput} is already in use.`
-      });
-      return;
-    }
-
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashedPass = bcrypt.hashSync(passwordInput, salt);
-
-    const userSubmission = {
-      name: nameInput,
-      email: emailInput,
-      password: hashedPass
-    };
-
-    const theUser = new User(userSubmission);
-
-    theUser.save((err) => {
-      if (err) {
-        res.render('auth/signup', {
-          errorMessage: 'Something went wrong. Try again later.'
-        });
-        return;
+  User.findOne({ email })
+    .then (user => {
+      if (user) {
+        throw new Error ( `The email ${email} is already in use.`);
+        res.render('auth/login');
       }
+      else {
+        const salt = bcrypt.genSaltSync(bcryptSalt);
+        const hashedPass = bcrypt.hashSync(password, salt);
 
-      res.redirect('/');
+        const userSubmission = {
+          name: name,
+          email: email,
+          password: hashedPass
+        };
+
+        const theUser = new User(userSubmission);
+
+        theUser.save()
+        .then(() => res.redirect('/'))
+        .catch(err => next(err));
+      }
+    })
+    .catch (e => {
+      return res.render('auth/login', {errorMessage: e.message});
     });
-  });
 });
 
 router.get('/login', (req, res, next) => {
@@ -106,7 +95,6 @@ router.get('/logout', (req, res, next) => {
       next(err);
       return;
     }
-
     res.redirect('/');
   });
 });
