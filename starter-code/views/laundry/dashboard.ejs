@@ -1,3 +1,4 @@
+<!-- views/laundry/dashboard.ejs -->
 <h2> Your laundry Dashboard </h2>
 
 <ul>
@@ -6,13 +7,22 @@
 </ul>
 
 
-<h3> Want to become a launderer? </h3>
+<% if (currentUserInfo.isLaunderer) { %>
+  <h3> You are a launderer </h3>
 
-<form action="/launderers" method="post">
-  <div>
-    <label for="fee-input"> Set your fee </label>
-    <input type="number" name="fee" id="fee-input">
-  </div>
+  <p>
+    Your laundering fee is
+    <b>$<%= currentUserInfo.fee %>.</b>
+  </p>
+<% } else { %>
+  <h3> Want to become a launderer? </h3>
 
-  <button> Become a Launderer </button>
-</form>
+  <form action="/launderers" method="post">
+    <div>
+      <label for="fee-input"> Set your fee </label>
+      <input type="number" name="fee" id="fee-input">
+    </div>
+
+    <button> Become a Launderer </button>
+  </form>
+<% } %>
