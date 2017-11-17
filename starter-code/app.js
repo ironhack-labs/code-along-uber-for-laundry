@@ -12,13 +12,9 @@ const MongoStore = require('connect-mongo')(session);
 var index = require('./routes/index');
 var users = require('./routes/users');
 const auth = require('./routes/auth');
+const laundryRoutes = require('./routes/laundry');
 
-// const dbUrl= 'mongodb://localhost/uberlaundry';
-// mongoose.connect(dbUrl).then(() => {
-//   debug(`Connected to DB: $(dbUrl)`);
-// });
-
-const dbURL = "mongodb://localhost/ironhack-trips";
+const dbURL = "mongodb://localhost/uberlaundry";
 mongoose.connect(dbURL).then(() => {
   debug(`Connected to DB: ${dbURL}`);
 });
@@ -63,8 +59,9 @@ app.use((req, res, next) => {
 });
 
 app.use('/', index);
-app.use('/', auth);
 app.use('/users', users);
+app.use('/', auth);
+app.use('/', laundryRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
