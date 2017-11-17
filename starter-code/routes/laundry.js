@@ -28,11 +28,25 @@ router.post('/launderers', (req, res, next) => {
       next(err);
       return;
     }
-
     req.session.currentUser = theUser;
 
     res.redirect('/dashboard');
   });
 });
+
+
+router.get('/launderers', (req, res, next) => {
+  User.find({ isLaunderer: true }, (err, launderersList) => {
+    if (err) {
+      next(err);
+      return;
+    }
+
+    res.render('laundry/launderers', {
+      launderers: launderersList
+    });
+  });
+});
+
 
 module.exports = router;
