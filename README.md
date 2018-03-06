@@ -14,7 +14,6 @@
 Clone [the Uber For Laundry repo](https://github.com/ironhack-labs/code-along-uber-for-laundry) into your `~/code/labs` folder to get the starter code.
 
 ```bash
-$ cd ~/code/labs
 $ git clone https://github.com/ironhack-labs/code-along-uber-for-laundry
 $ cd code-along-uber-for-laundry/
 ```
@@ -59,7 +58,7 @@ The app will allow users to register and schedule a laundry pickup. They will be
 
 The starter code for this project includes:
 
-1. An app structure created by the `express-generator`.
+1. An app structure created by the `ironhack_generator`.
 2. Layout already added for you.
 3. Views for all the pages we are going to be working with.
 4. The `User` and `LaundryPickup` models.
@@ -82,16 +81,15 @@ starter-code/
 │   └── users.js
 └── views
     ├── auth
-    │   ├── login.ejs
-    │   └── signup.ejs
-    ├── error.ejs
-    ├── index.ejs
+    │   ├── login.hbs
+    │   └── signup.hbs
+    ├── error.hbs
+    ├── index.hbs
     ├── laundry
-    │   ├── dashboard.ejs
-    │   ├── launderer-profile.ejs
-    │   └── launderers.ejs
-    └── layouts
-        └── main-layout.ejs
+    │   ├── dashboard.hbs
+    │   ├── launderer-profile.hbs
+    │   └── launderers.hbs
+    └── layout.hbs
 ```
 
 If you visit the homepage, you will see that there are a bunch of links that don't work. We will be adding the routes for each of those pages as part of this lesson.
