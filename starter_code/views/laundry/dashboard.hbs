@@ -1,11 +1,26 @@
 <h2> Your laundry Dashboard </h2>
 
 <ul>
-  <li> <a href="/launderers"> Find a Launderer </a> </li>
+  <li> <a href="/launderers" class="btn btn-warning"> Find a Launderer </a> </li>
   <li> <a href="/logout"> Log Out </a> </li>
 </ul>
+<!-- ... inside of views/laundry/dashboard.hbs -->
 
+<h3> Pending Pickups </h3>
 
+<ul>
+{{#each pickups}}
+    <li>
+      <h4> {{ this.pickupDate }} </h4>
+
+      <ul>
+        <li> <b>User</b>: {{ this.user.username }} </li>
+        <li> <b>Launderer</b>: {{ this.launderer.username }} </li>
+      </ul>
+    </li>
+{{/each}}
+</ul>
+{{#unless isLaunderer}}
 <h3> Want to become a launderer? </h3>
 
 <form action="/launderers" method="post">
@@ -16,3 +31,4 @@
 
   <button> Become a Launderer </button>
 </form>
+{{/unless}}

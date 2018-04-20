@@ -9,14 +9,14 @@
 <form action="/signup" method="post">
   <div>
     <label for="name-input"> Name </label>
-    <input type="text" name="name" id="name-input"
-      placeholder="e.g., Diana Prince">
+    <input type="text" name="username" id="name-input"
+      placeholder="e.g., Le Marc">
   </div>
 
   <div>
     <label for="email-input"> Email </label>
     <input type="email" name="email" id="email-input"
-      placeholder="e.g., diana@themyscira.agency">
+      placeholder="e.g., lemarc@ironhack.agency">
   </div>
 
   <div>
@@ -24,6 +24,17 @@
     <input type="password" name="password" id="password-input"
       placeholder="e.g., ••••••••••••">
   </div>
+  {{!-- <div>
+    <label for="launderer-input"> Are you a launderer? </label>
+    <input type="checkbox" data-toggle="switch" value="true" name="launderer" id="launderer-input">
+  </div> --}}
+{{!--   
+  <div>
+    <label for="fee-input"> Fee </label>
+    <input type="number" name="fee" id="fee-input"
+    <small id="feeHelp" class="form-text text-muted">Only needed if you are a launderer.</small>
+
+  </div> --}}
 
   <button> Create New Account </button>
 </form>
