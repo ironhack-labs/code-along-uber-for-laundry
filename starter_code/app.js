@@ -9,6 +9,12 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const flash = require('connect-flash');
+
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 mongoose.Promise = Promise;
 mongoose
@@ -30,6 +36,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(session({
+  secret: 'imasecret',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {maxAge: 60000},
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60,
+  })
+}));
+
+app.use(flash());
+
+require('./passport/localStrategy');
+require('./passport/serializer');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
@@ -47,12 +72,21 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.use((req, res, next) => {
+  res.locals.title = 'Uber Laundry';
+  res.locals.user = req.user;
 
+  next();
+})
 
 
 const index = require('./routes/index');
 app.use('/', index);
 
+const authRouter = require('./routes/auth');
+app.use('/', authRouter);
+
+const laundryRouter = require('./routes/laundry');
+app.use('/', laundryRouter);
 
 module.exports = app;
