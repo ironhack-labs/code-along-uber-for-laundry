@@ -8,6 +8,9 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const flash = require("connect-flash")
+const session= require("express-session")
+const mongoStore= require("connect-mongo")(session)
 
 
 mongoose.Promise = Promise;
@@ -32,11 +35,11 @@ app.use(cookieParser());
 
 // Express View engine setup
 
-app.use(require('node-sass-middleware')({
+/*app.use(require('node-sass-middleware')({
   src:  path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
   sourceMap: true
-}));
+}));*/
       
 
 app.set('views', path.join(__dirname, 'views'));
@@ -45,14 +48,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
+app.use(session({
+  secret: 'irongenerator',
+  resave: true,
+  saveUninitialized: true,
+  store: new mongoStore( { mongooseConnection: mongoose.connection })
+ }))
+app.use(flash())
+require("./passport")(app)
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 
 
+const index = require("./routes/index");
+//const passportRouter = require("./routes/passportRouter");
+app.use("/", index);
+//app.use("/", passportRouter);
 
-const index = require('./routes/index');
-app.use('/', index);
+const authRoutes=require("./routes/auth")
+app.use("/auth",authRoutes)
 
+
+const laundryRoutes = require('./routes/laundry')
+app.use("/laundry", laundryRoutes)
 
 module.exports = app;
