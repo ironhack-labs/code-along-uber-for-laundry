@@ -1,10 +1,19 @@
 <p>Welcome to {{title}}</p>
 <nav>
   <ul>
-    <li> <a href="/signup"> Sign Up </a> </li>
-    <li> <a href="/login"> Log In </a> </li>
-    <li> <a href="/launderers"> Find a Launderer </a> </li>
-    <li> <a href="/dashboard"> See Dashboard </a> </li>
-    <li> <a href="/logout"> Log Out </a> </li>
+    {{#if user}}
+     <li> <a href="/laundry/dashboard"> Become a Launderer </a> </li>
+    <li> <a href="/laundry/launderers"> Find a Launderer </a> </li>
+    <li> <a href="/laundry/dashboard"> See Dashboard </a> </li>
+    <li> <a href="/auth/logout"> Log Out </a> </li>
+    {{/if}}
+
+
+    {{#unless user}}
+    <li> <a href="/auth/signup"> Sign Up </a> </li>
+    <li> <a href="/auth/login"> Log In </a> </li>
+    {{/unless}}
+  
+    
   </ul>
 </nav>

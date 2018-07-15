@@ -6,10 +6,10 @@
   </p>
 {{/if}}
 
-<form action="/login" method="post">
+<form action="/auth/login" method="post">
   <div>
     <label for="email-input"> Email </label>
-    <input type="email" name="email" id="email-input"
+    <input type="email" name="username" id="email-input"
       placeholder="e.g., xena@warrior.company">
   </div>
 
@@ -24,7 +24,7 @@
 
 <p>
   Don't have an account?
-  <a href="/signup">
+  <a href="/auth/signup">
     Create an account.
   </a>
 </p>

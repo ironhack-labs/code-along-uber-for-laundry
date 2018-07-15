@@ -3,16 +3,16 @@
 <ul>
   {{#each launderers}}
     <li>
-      <h3> {{ this.name }} </h3>
+      <h3> {{ this.email }} </h3>
       <p> Fee: ${{ this.fee }} </p>
 
-      <a href="/launderers/{{ this._id }}">
+      <a href="/laundry/launderers/{{ this._id }}">
         Schedule a Pickup
       </a>
     </li>
   {{/each}}
 </ul>
 
-<a href="/dashboard">
+<a href="/laundry/dashboard">
   Back to Dashboard
 </a>
