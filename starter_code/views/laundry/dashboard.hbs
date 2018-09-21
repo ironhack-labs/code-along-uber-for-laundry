@@ -24,3 +24,19 @@
     <button> Become a Launderer </button>
   </form>
 {{/if}}
+
+<h3> Pending Pickups </h3>
+
+<ul>
+  
+{{#each pickups}}
+    <li>
+      <h4> {{ this.pickupDate }} </h4>
+
+      <ul>
+        <li> <b>User</b>: {{ this.user.name }} </li>
+        <li> <b>Launderer</b>: {{ this.launderer.name }} </li>
+      </ul>
+    </li>
+{{/each}}
+</ul>

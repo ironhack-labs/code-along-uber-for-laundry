@@ -11,7 +11,29 @@ const {
 
 
 router.get('/dashboard', ensureLoggedIn("/auth/login") ,(req, res, next) => {
-  res.render('laundry/dashboard');
+  let query;
+
+  if (req.user.isLaunderer) {
+    query = { launderer: req.user.id };
+  } else {
+    query = { user: req.user.id };
+  }
+
+  LaundryPickup
+    .find(query)
+    .populate('user', 'name')
+    .populate('launderer', 'name')
+    .sort('pickupDate')
+    .exec((err, pickupDocs) => {
+      if (err) {
+        next(err);
+        return;
+      }
+
+      res.render('laundry/dashboard', {
+        pickups: pickupDocs
+      });
+    });
 });
 
 
