@@ -8,14 +8,17 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const flash = require("connect-flash");
 
 
-mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/uber-for-loundry', {useMongoClient: true})
-  .then(() => {
-    console.log('Connected to Mongo!')
-  }).catch(err => {
+  .connect('mongodb://localhost/uber-for-laundry', {useNewUrlParser: true})
+  .then(x => {
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+  })
+  .catch(err => {
     console.error('Error connecting to mongo', err)
   });
 
@@ -43,16 +46,43 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+app.use(cookieParser());
+
+app.use(session({
+secret: 'Chicago me limpio',
+resave: true,
+saveUninitialized: true,
+cookie: { maxAge: 60000 },
+store: new MongoStore({
+  mongooseConnection: mongoose.connection,
+  ttl: 24 * 60 * 60 // 1 day
+})
+}));
+app.use(flash());
+
+require('./passport')(app);
 
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.use((req,res,next) => {
+  // default value for title local
+  res.locals.title = 'Uber laundry Chicago Me Limpio';
+  res.locals.user = req.user;
+  res.locals.message = req.flash("error");
+  next();
+}) 
 
 
 
 const index = require('./routes/index');
 app.use('/', index);
+
+const auth=require("./routes/auth");
+app.use("/auth",auth)
+
+const laundry=require("./routes/laundry");
+app.use("/",laundry)
 
 
 module.exports = app;

@@ -1,16 +1,19 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema   = mongoose.Schema;
 
 const userSchema = new Schema({
+  email:String,
   name: String,
-  email: String,
   password: String,
-  isLaunderer: { type: Boolean, default: false },
-  fee: { type: Number, default: null }
+  isLaunderer: {type:Boolean,default:false},
+  fee:{type:Number,default:0}
+}, {
+  timestamps: {
+    createdAt: "created_at",
+    updatedAt: "updated_at"
+  }
 });
 
-userSchema.set('timestamps', true);
-
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
