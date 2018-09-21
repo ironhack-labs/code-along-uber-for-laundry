@@ -1,18 +1,9 @@
-<h2> Find a launderer </h2>
-
-<ul>
-  {{#each launderers}}
-    <li>
-      <h3> {{ this.name }} </h3>
-      <p> Fee: ${{ this.fee }} </p>
-
-      <a href="/launderers/{{ this._id }}">
-        Schedule a Pickup
-      </a>
-    </li>
-  {{/each}}
-</ul>
-
-<a href="/dashboard">
-  Back to Dashboard
-</a>
+{{#each launderers}}
+<div>
+  <p>Launderer: {{name}}</p>
+  <p>fee: {{fee}} </p>
+  <a href="/launderers/{{id}}">Pick up</a>
+</div>
+{{/each}}
+<br><br>
+<a href="/">Go back</a>

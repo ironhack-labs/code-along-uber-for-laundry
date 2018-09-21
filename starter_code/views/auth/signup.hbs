@@ -1,36 +1,19 @@
-<h2> Sign Up </h2>
-
-{{#if errorMessage}}
-  <p class="error-message">
-    {{ errorMessage }}
-  </p>
+<h2>Sign up</h2>
+{{#if message}}
+<p>{{message}}</p>
 {{/if}}
-
-<form action="/signup" method="post">
-  <div>
-    <label for="name-input"> Name </label>
-    <input type="text" name="name" id="name-input"
-      placeholder="e.g., Diana Prince">
-  </div>
-
-  <div>
-    <label for="email-input"> Email </label>
-    <input type="email" name="email" id="email-input"
-      placeholder="e.g., diana@themyscira.agency">
-  </div>
-
-  <div>
-    <label for="password-input"> Password </label>
-    <input type="password" name="password" id="password-input"
-      placeholder="e.g., ••••••••••••">
-  </div>
-
-  <button> Create New Account </button>
+<form action="/auth/signup" method="post">
+<label for="email">Email: </label>
+<input type="email" placeholder="email" name="email">
+<br><br>
+<label for="password">Password: </label>
+<input type="password" name="password" placeholder="password">
+<br><br>
+<label for="name">Name: </label>
+<input type="text" name="name" placeholder="name">
+<br><br>
+<button type="submit">Sing up</button>
 </form>
-
-<p>
-  Already have an account?
-  <a href="/login">
-    Log in.
-  </a>
-</p>
+<br><br>
+<p>Already registered?</p>
+<a href="/auth/login">Log in</a>
