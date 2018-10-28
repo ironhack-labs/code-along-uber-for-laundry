@@ -1,29 +1,6 @@
-![Ironhack Logo](https://i.imgur.com/1QgrNNw.png)
+![logo_ironhack_blue 7](https://user-images.githubusercontent.com/23629340/40541063-a07a0a8a-601a-11e8-91b5-2f13e4e6b441.png)
 
-# Express | Code Along - Uber For Laundry
-
-## Learning Goals
-- Add basic user authentication to an Express application.
-- Create sessions in an Express application.
-- Store user information in the session and use it in some routes.
-- Prevent anonymous (logged out) users from accessing parts of your application.
-
-
-## Setup
-
-Clone [the Uber For Laundry repo](https://github.com/ironhack-labs/code-along-uber-for-laundry) into your `~/code/labs` folder to get the starter code.
-
-```bash
-$ git clone https://github.com/ironhack-labs/code-along-uber-for-laundry
-$ cd code-along-uber-for-laundry/
-```
-
-Run `npm install` to get all the modules from the `package.json` file.
-
-```bash
-$ npm install
-```
-
+# Code Along - Uber For Laundry
 
 ## Introduction
 
@@ -53,6 +30,29 @@ The app will allow users to register and schedule a laundry pickup. They will be
 6. Schedule a laundry pickup with a launderer.
 7. See pending pickups.
 
+
+## Learning Goals
+
+- Add basic user authentication to an Express application.
+- Create sessions in an Express application.
+- Store user information in the session and use it in some routes.
+- Prevent anonymous (logged out) users from accessing parts of your application.
+
+
+## Setup
+
+Clone [the Uber For Laundry repo](https://github.com/ironhack-labs/code-along-uber-for-laundry) into your `~/code/labs` folder to get the starter code.
+
+```bash
+$ git clone https://github.com/ironhack-labs/code-along-uber-for-laundry
+$ cd code-along-uber-for-laundry/
+```
+
+Run `npm install` to get all the modules from the `package.json` file.
+
+```bash
+$ npm install
+```
 
 ### Starter Code
 
@@ -95,3 +95,5 @@ starter-code/
 If you visit the homepage, you will see that there are a bunch of links that don't work. We will be adding the routes for each of those pages as part of this lesson.
 
 Let's get to coding!
+
+Happy Coding! :heart:
