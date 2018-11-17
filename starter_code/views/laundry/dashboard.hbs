@@ -5,6 +5,15 @@
   <li> <a href="/logout"> Log Out </a> </li>
 </ul>
 
+{{#if currentUserInfo.isLaunderer}}
+<h3> You are a launderer </h3>
+
+<p>
+  Your laundering fee is
+  <b>${{ currentUserInfo.fee }}.</b>
+</p>
+{{else}}
+
 
 <h3> Want to become a launderer? </h3>
 
@@ -16,3 +25,19 @@
 
   <button> Become a Launderer </button>
 </form>
+
+<h3> Pending Pickups </h3>
+
+<ul>
+  {{#each pickups}}
+  <li>
+    <h4> {{ this.pickupDate }} </h4>
+
+    <ul>
+      <li> <b>User:</b> {{ this.user.name }} </li>
+      <li> <b>Launderer:</b> {{ this.launderer.name }} </li>
+    </ul>
+  </li>
+  {{/each}}
+</ul>
+{{/if}}
