@@ -1,12 +1,7 @@
 <h2> Sign Up </h2>
 
-{{#if errorMessage}}
-  <p class="error-message">
-    {{ errorMessage }}
-  </p>
-{{/if}}
 
-<form action="/signup" method="post">
+<form action="/auth/signup" method="post">
   <div>
     <label for="name-input"> Name </label>
     <input type="text" name="name" id="name-input"
@@ -22,15 +17,20 @@
   <div>
     <label for="password-input"> Password </label>
     <input type="password" name="password" id="password-input"
-      placeholder="e.g., ••••••••••••">
+      placeholder="e.g., ••••••••••••" readonly onfocus="if (this.hasAttribute('readonly')) {
+      this.removeAttribute('readonly');
+      this.blur(); this.focus();}"/>
   </div>
 
-  <button> Create New Account </button>
+  <button class="signupBut"> Create New Account </button>
+  {{#each messages}}
+    <div class="error-message">{{this}}</div>
+  {{/each}}
 </form>
 
 <p>
   Already have an account?
-  <a href="/login">
+  <a href="/auth/login">
     Log in.
   </a>
 </p>

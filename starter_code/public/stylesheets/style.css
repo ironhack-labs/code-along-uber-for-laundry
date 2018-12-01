@@ -1,8 +1,119 @@
-body {
-  padding: 50px;
+body, html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
-a {
-  color: #00B7FF; }
+input, button, input:focus, button:focus :focus {
+  outline: none !important; }
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+.container {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: -4em;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center; }
+  .container h1 {
+    font-weight: bold;
+    font-size: calc(1.8vh + 1.8vw + 1.8em); }
+  .container h2 {
+    font-weight: bold;
+    margin-bottom: 1em; }
+  .container form {
+    width: 25em;
+    position: relative; }
+    .container form label {
+      color: #666;
+      display: inline-block;
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 1em; }
+      .container form label:first-child {
+        margin-top: 0; }
+    .container form input, .container form button {
+      box-sizing: border-box;
+      font-size: 14px;
+      outline: none !important;
+      padding: .5em 1em;
+      margin-bottom: 1em;
+      width: 100%;
+      border: 2px solid #eee;
+      -webkit-border-radius: 2em;
+      -moz-border-radius: 2em;
+      border-radius: 2em; }
+    .container form input {
+      background: transparent; }
+      .container form input:focus {
+        border-color: 0 !important;
+        box-shadow: 0 !important; }
+    .container form select {
+      background: transparent;
+      border: 0;
+      width: 100%;
+      outline: none !important; }
+    .container form .roundedSelect {
+      -webkit-border-radius: 2em;
+      -moz-border-radius: 2em;
+      border-radius: 2em;
+      padding: .35em 1em;
+      margin-bottom: 1em;
+      width: 100%;
+      border: 2px solid #eee; }
+    .container form button {
+      border-radius: 2em;
+      color: #fff;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 8px 16px;
+      margin-top: 1.5em;
+      margin-bottom: .7em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: .3s ease background;
+      width: 100%; }
+      .container form button:hover {
+        transition: .3s ease background; }
+      .container form button.signupBut {
+        background: #43a3e6;
+        border: 2px solid #43a3e6; }
+        .container form button.signupBut:hover {
+          background: #fff;
+          color: #43a3e6; }
+      .container form button.loginBut {
+        background: #00a388;
+        border: 2px solid #00a388; }
+        .container form button.loginBut:hover {
+          background: #fff;
+          color: #00a388; }
+      .container form button.addBut, .container form button.editBut {
+        background: grey;
+        border: 2px solid grey; }
+        .container form button.addBut:hover, .container form button.editBut:hover {
+          background: #fff;
+          color: grey; }
+  .container .account-message {
+    font-size: .7em;
+    text-align: center; }
+
+.error-message {
+  background: #F02B63;
+  box-sizing: border-box;
+  color: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  width: 100%; }
 
 /*# sourceMappingURL=style.css.map */
