@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-const passport = require('passport')
 const bcrypt = require("bcryptjs");
 const bcryptSalt = 10;
 
@@ -95,8 +94,7 @@ router.post('/login', (req, res, next) => {
     }
 
     req.session.currentUser = theUser;
-    // console.log(req.session.currentUser);
-    res.redirect('/');
+    res.redirect('/dashboard');
   });
 });
 

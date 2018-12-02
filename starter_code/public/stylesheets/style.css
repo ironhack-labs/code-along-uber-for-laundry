@@ -1,8 +1,80 @@
 body {
-  padding: 50px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: #FFF4E0;
+  height: 100vh;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
-a {
-  color: #00B7FF; }
+li {
+  list-style: none; }
+
+nav {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+  background-color: #393E46;
+  color: #FFF4E0; }
+  nav a {
+    color: #FFF4E0;
+    text-decoration: none;
+    padding: 0 5px; }
+
+.error-message {
+  color: #FC3C3C; }
+
+.content {
+  flex: 1 0 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center; }
+  .content .welcome {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em; }
+  .content .formContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(57, 62, 70, 0.5);
+    border-radius: 20px;
+    padding: 20px 30px; }
+    .content .formContainer .email, .content .formContainer .password {
+      padding: 10px 0; }
+    .content .formContainer form {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center; }
+  .content .laundererList ul {
+    display: flex;
+    flex-flow: row wrap; }
+    .content .laundererList ul li {
+      padding: 10px 20px; }
+      .content .laundererList ul li a {
+        text-decoration: none; }
+  .content .profileDetail {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 10px 30px; }
+  .content .schedule {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 40px 30px; }
+
+footer {
+  flex-shrink: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  padding: 15px 10px;
+  background-color: #393E46;
+  color: #FFF4E0; }
 
 /*# sourceMappingURL=style.css.map */

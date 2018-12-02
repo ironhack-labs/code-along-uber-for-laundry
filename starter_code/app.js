@@ -1,71 +1,74 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const bodyParser   = require('body-parser');
-const cookieParser = require('cookie-parser');
-const express      = require('express');
-const session = require('express-session');
-const favicon      = require('serve-favicon');
-const hbs          = require('hbs');
-const mongoose     = require('mongoose');
-const MongoStore = require('connect-mongo')(session);
-const logger       = require('morgan');
-const path         = require('path');
-
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const express = require("express");
+const session = require("express-session");
+const favicon = require("serve-favicon");
+const hbs = require("hbs");
+const mongoose = require("mongoose");
+const MongoStore = require("connect-mongo")(session);
+const logger = require("morgan");
+const path = require("path");
 
 mongoose.Promise = Promise;
 mongoose
-  .connect(process.env.DBURL, {useMongoClient: true})
+  .connect(
+    process.env.DBURL,
+    { useMongoClient: true }
+  )
   .then(() => {
-    console.log('Connected to Mongo!')
-  }).catch(err => {
-    console.error('Error connecting to mongo', err)
+    console.log("Connected to Mongo!");
+  })
+  .catch(err => {
+    console.error("Error connecting to mongo", err);
   });
 
-const app_name = require('./package.json').name;
-const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
+const app_name = require("./package.json").name;
+const debug = require("debug")(
+  `${app_name}:${path.basename(__filename).split(".")[0]}`
+);
 
 const app = express();
 
 // Middleware Setup
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
-
 // Express View engine setup
 
-app.use(require('node-sass-middleware')({
-  src:  path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  sourceMap: true
-}));
-      
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
-
-app.use(session({
-  secret: 'pepe simpson',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { maxAge: 60000 },
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60 // 1 day
+app.use(
+  require("node-sass-middleware")({
+    src: path.join(__dirname, "public"),
+    dest: path.join(__dirname, "public"),
+    sourceMap: true
   })
- }));
+);
 
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "hbs");
+app.use(express.static(path.join(__dirname, "public")));
+app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
- app.use((req, res, next) => {
+app.use(
+  session({
+    secret: "pepe simpson",
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 },
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60 // 1 day
+    })
+  })
+);
+
+app.use((req, res, next) => {
   if (req.session.currentUser) {
-    
     app.locals.currentUserInfo = req.session.currentUser;
     app.locals.isUserLoggedIn = true;
-    console.log(app.locals.currentUserInfo)
   } else {
     app.locals.isUserLoggedIn = false;
   }
@@ -73,17 +76,15 @@ app.use(session({
   next();
 });
 // default value for title local
-app.locals.title = 'Become a Laundrererer';
+app.locals.title = "Uber for Laundry";
 
+const index = require("./routes/index");
+app.use("/", index);
 
+const authRoutes = require("./routes/auth");
+app.use("/", authRoutes);
 
-const index = require('./routes/index');
-app.use('/', index);
-
-const authRoutes=require('./routes/auth')
-app.use('/',authRoutes);
-
-const laudryRoutes=require('./routes/laundry')
-app.use('/',laudryRoutes);
+const laudryRoutes = require("./routes/laundry");
+app.use("/", laudryRoutes);
 
 module.exports = app;

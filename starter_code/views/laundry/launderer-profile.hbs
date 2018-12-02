@@ -1,32 +1,22 @@
-<h2> Launderer Profile </h2>
+<h2>Launderer Profile</h2>
+<div class="profileDetail">
+  <h3>Name: {{ theLaunderer.name }} </h3>
 
-<h3> {{ theLaunderer.name }} </h3>
+  <p>Fee:<b> ${{ theLaunderer.fee }}</b></p>
+</div>
 
-<p>
-  Fee:
-  <b> ${{ theLaunderer.fee }} </b>
-</p>
+<div class="schedule">
+  <h3>Schedule a Pickup With<i> {{ theLaunderer.name }} </i></h3>
 
+  <form action="/laundry-pickups" method="post">
+    
+      <label for="pickup-date-input">When would you like your laundry picked up?</label>
+      <input type="date" name="pickupDate" id="pickup-date-input">
+    <input type="hidden" name="laundererId" value="{{ theLaunderer._id }}">
 
-<h3>
-  Schedule a Pickup With
-  <i> {{ theLaunderer.name }} </i>
-</h3>
-
-<form action="/laundry-pickups" method="post">
-  <div>
-    <label for="pickup-date-input">
-      When would you like your laundry picked up?
-    </label>
-    <input type="date" name="pickupDate" id="pickup-date-input">
-  </div>
-
-  <input type="hidden" name="laundererId" value="{{ theLaunderer._id }}">
-
-  <button> Schedule This Pickup </button>
-</form>
+    <button>Schedule This Pickup</button>
+  </form>
+</div>
 
 
-<a href="/launderers">
-  Find Another Launderer
-</a>
+<a href="/launderers">Find Another Launderer</a>

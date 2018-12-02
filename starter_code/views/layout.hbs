@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <header>
-      <h1> <a href="/"> {{title}} </a> </h1>
-    </header>
+
+<head>
+  <title>{{title}}</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <nav>
+    <h2>{{title}}</h2>
+    {{#unless isUserLoggedIn}}
+    <div class="notLogged">
+      <a href="/signup">Sign Up</a>
+      <a href="/login">Log In</a>
+    </div>
+    {{/unless}}
+
+    {{#if isUserLoggedIn}}
+    <div class="logged">
+      <a href="/launderers">Find a Launderer</a>
+      <a href="/dashboard">See Dashboard</a>
+      <a class="logout" href="/logout">Log Out</a>
+    </div>
+    {{/if}}
+  </nav>
+
+  <div class="content">
     {{{body}}}
-    <footer>
-      <p> Made with &hearts; at Ironhack. </p>
-    </footer>
-    <script src='/javascripts/script.js' />
-  </body>
-</html>
+  </div>
+
+  <footer>
+    {{#if isUserLoggedIn}}
+    <p>Sesion iniciada para usuario: {{currentUserInfo.name}}</p>
+    {{/if}}
+    <p> Made with &hearts; at Ironhack. </p>
+  </footer>
+  <script src='/javascripts/script.js'>
+  </body >
+</html >

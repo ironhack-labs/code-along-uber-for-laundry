@@ -1,18 +1,4 @@
-<p>Welcome to {{title}}</p>
-<nav>
-  {{#if isUserLoggedIn}}
-  <p>Estas logado!! {{currentUserInfo.name}}</p>
-  {{/if}}
-  <ul>
-    <li> <a href="/"> Home </a> </li>
-    {{#unless isUserLoggedIn}}
-    <li> <a href="/signup"> Sign Up </a> </li>
-    <li> <a href="/login"> Log In </a> </li>
-    {{/unless}}
-    {{#if isUserLoggedIn}}
-    <li> <a href="/launderers"> Find a Launderer </a> </li>
-    <li> <a href="/dashboard"> See Dashboard </a> </li>
-    <li> <a href="/logout"> Log Out </a> </li>
-    {{/if}}
-  </ul>
-</nav>
+<div class="welcome">
+  <p>Welcome to Uber for Laundry, where you can schedule a pickup for someone to do your laundry.</p>
+  <p>You can even register yourself as a Laundrer to make the pickups and get some money extra</p>
+</div>
