@@ -85,7 +85,7 @@ const passportRoutes = require('./routes/passportRoutes');
 app.use('/', passportRoutes);
 
 const authRoutes = require('./routes/authRoutes');
-app.use('/', authRoutes);
+app.use('/auth', authRoutes);
 
 const laundryRoutes = require('./routes/laundryRoutes');
 app.use('/laundry', laundryRoutes);

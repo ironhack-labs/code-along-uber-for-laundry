@@ -8,16 +8,53 @@ body, html {
 input, button, input:focus, button:focus :focus {
   outline: none !important; }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 1em; }
-  ul li {
-    display: inline-block;
+a.btnA {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 800;
+  padding: .4em;
+  min-width: 10em;
+  height: 2.3em;
+  border-radius: 5em;
+  color: white;
+  background-color: #00B7FF;
+  border: 2px solid transparent;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  -ms-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out; }
+  a.btnA:hover {
+    color: #00B7FF;
+    border: 2px solid #00B7FF;
+    background-color: white;
+    -webkit-transform: scale(1.1, 1.1);
+    -moz-transform: scale(1.1, 1.1);
+    -ms-transform: scale(1.1, 1.1);
+    -o-transform: scale(1.1, 1.1);
+    transform: scale(1.1, 1.1);
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out; }
+  a.btnA.gold {
+    background-color: goldenrod;
     margin-right: 1em; }
-    ul li:last-child {
-      margin-right: 0; }
+    a.btnA.gold:hover {
+      color: goldenrod;
+      border: 2px solid goldenrod;
+      background-color: white; }
+
+.bottom {
+  position: absolute;
+  bottom: 1em;
+  left: 1em; }
+
+.underline {
+  text-decoration: underline; }
 
 .container {
   width: 80%;
@@ -28,6 +65,19 @@ ul {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center; }
+  .container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 1em; }
+    .container ul li {
+      display: inline-block;
+      margin-right: 3em;
+      padding: 2em;
+      border: 2px solid #c7c7c7;
+      border-radius: 1em; }
+      .container ul li:last-child {
+        margin-right: 0; }
   .container h1 {
     font-weight: bold;
     font-size: calc(1.8vh + 1.8vw + 1.8em); }
