@@ -1,11 +1,11 @@
 <h2>Find a launderer</h2>
 
-<ul>
+<ul class="launderers">
   {{#each launderers}}
-    <li>
-      <h3 class="underline"> {{this.name}} </h3>
+    <li class="launderer">
+      <h3 class="underline">{{this.name}}</h3>
       <p> Fee: ${{this.fee}} </p>
-      <a  class="btnA gold" href="/laundry/launderers/{{ this._id }}">Schedule a Pickup</a>
+      <a  class="btnA gold" href="/laundry/launderers/{{this._id}}">Schedule a Pickup</a>
     </li>
   {{/each}}
 </ul>

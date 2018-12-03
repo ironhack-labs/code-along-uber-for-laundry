@@ -70,13 +70,13 @@ a.btnA {
     padding: 0;
     margin: 0;
     margin-bottom: 1em; }
-    .container ul li {
+    .container ul li.launderer {
       display: inline-block;
       margin-right: 3em;
       padding: 2em;
       border: 2px solid #c7c7c7;
       border-radius: 1em; }
-      .container ul li:last-child {
+      .container ul li.launderer:last-child {
         margin-right: 0; }
   .container h1 {
     font-weight: bold;

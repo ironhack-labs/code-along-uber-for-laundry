@@ -17,3 +17,18 @@
     <button class="addBut">Become a Launderer</button>
   </form>
 {{/if}}
+<br>
+<br>
+<h3><b>Pending Pickups</b></h3>
+<br>
+<ul>
+{{#each pickups}}
+    <li>
+      <h5>- {{this.pickupDate}}</h5>
+      <ul>
+        <li><b>User</b>: {{this.user.name}}</li>
+        <li><b>Launderer</b>: {{this.launderer.name}}</li>
+      </ul>
+    </li>
+{{/each}}
+</ul>

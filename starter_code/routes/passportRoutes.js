@@ -14,9 +14,9 @@ passportRouter.post("/auth/login", passport.authenticate("local", {
   failureFlash: true,
   passReqToCallback: true
 }),(req,res) => {
-  if(req.session.returnTo){
-    return res.redirect(req.session.returnTo);
-  }
+  // if(req.session.returnTo){
+  //   return res.redirect(req.session.returnTo);
+  // }
   res.redirect('/');
 });
 
