@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  console.log('IronGenerator JS imported successfully!');
+  $('pickupDate').each((i,e) => {
+    console.log(this);
+  });
 
 }, false);
