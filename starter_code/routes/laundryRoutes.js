@@ -17,7 +17,12 @@ laundryRouter.get('/dashboard', isLoggedIn('/auth/login'), (req, res, next) => {
     .populate('user', 'name')
     .populate('launderer', 'name')
     .sort('pickupDate')
-    .exec((err, pickups) => {
+    .exec((err, picks) => {
+      const pickups = JSON.parse(JSON.stringify(picks));
+      pickups.forEach((e,i)=>{
+        let date =  new Date(e.pickupDate);
+        e.pickupDate = date.toDateString();
+      });
       if (err) {
         next(err);
         return;
