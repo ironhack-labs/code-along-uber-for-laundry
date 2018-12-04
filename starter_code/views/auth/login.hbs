@@ -1,30 +1,30 @@
 <h2> Log In </h2>
 
-{{#if errorMessage}}
-  <p class="error-message">
-    {{ errorMessage }}
-  </p>
-{{/if}}
-
-<form action="/login" method="post">
+<form action="/auth/login" method="post">
   <div>
-    <label for="email-input"> Email </label>
-    <input type="email" name="email" id="email-input"
-      placeholder="e.g., xena@warrior.company">
+    <label for="NAME-input"> Name </label>
+    <input type="text" name="username" id="name-input"
+      placeholder="e.g., xena warrior">
   </div>
 
   <div>
     <label for="password-input"> Password </label>
     <input type="password" name="password" id="password-input"
-      placeholder="e.g., ••••••••••••">
+      placeholder="e.g., ••••••••••••" readonly onfocus="if (this.hasAttribute('readonly')) {
+      this.removeAttribute('readonly');
+      this.blur(); this.focus();}"/>
   </div>
 
-  <button> Log In </button>
+  {{#each messages}}
+    <div class="error-message">{{this}}</div>
+  {{/each}}
+
+  <button class="loginBut"> Log In </button>
 </form>
 
 <p>
   Don't have an account?
-  <a href="/signup">
+  <a href="/auth/signup">
     Create an account.
   </a>
 </p>

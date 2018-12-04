@@ -1,8 +1,213 @@
-body {
-  padding: 50px;
+@mixin transform ($value) {
+	-webkit-transform: $value;
+	-moz-transform: $value;
+	-ms-transform: $value;
+	-o-transform: $value;
+	transform: $value;
+}
+
+@mixin transition {
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  -ms-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+@mixin hover_scale {
+	@include transform(scale(1.1,1.1));
+  @include transition;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+input, button, input:focus, button:focus :focus {
+  outline: none !important;
+}
+
+a.btnA {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 800;
+  padding: .4em;
+  min-width: 10em;
+  height: 2.3em;
+  border-radius: 5em;
+  color: white;
+  background-color: #00B7FF;
+  border: 2px solid transparent;
+  @include transition;
+  &:hover {
+    color: #00B7FF;
+    border: 2px solid #00B7FF;
+    background-color: white;
+    @include hover_scale;
+  }
+  &.gold {
+    background-color: goldenrod;
+    margin-right: 1em;
+    &:hover {
+      color: goldenrod;
+      border: 2px solid goldenrod;
+      background-color: white;
+    }
+  }
+}
+
+.bottom {
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.container {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: -4em;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 1em;
+    li.launderer {
+      display: inline-block;
+      margin-right: 3em;
+      padding: 2em;
+      border: 2px solid rgb(199, 199, 199);
+      border-radius: 1em;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  h1 {
+    font-weight: bold;
+    font-size: calc(1.8vh + 1.8vw + 1.8em);
+  }
+  h2 {
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
+  form {
+    width: 25em;
+    position: relative;
+    label {
+      color: #666;
+      display: inline-block;
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 1em;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    input, button {
+      box-sizing: border-box;
+      font-size: 14px;
+      outline: none !important;
+      padding: .5em 1em;
+      margin-bottom: 1em;
+      width: 100%;
+      border: 2px solid #eee;
+      -webkit-border-radius: 2em;
+      -moz-border-radius: 2em;
+      border-radius: 2em;
+    }
+    input {
+      background:transparent;
+      &:focus {
+        border-color: 0 !important;
+        box-shadow: 0 !important;
+      }
+    }
+    select {
+      background: transparent;
+      border: 0;
+      width: 100%;
+      outline: none !important;
+    }
+    .roundedSelect {
+      -webkit-border-radius: 2em;
+      -moz-border-radius: 2em;
+      border-radius: 2em;
+      padding: .35em 1em;
+      margin-bottom: 1em;
+      width: 100%;
+      border: 2px solid #eee;
+    }
+    button {
+      border-radius: 2em;
+      color: #fff;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 8px 16px;
+      margin-top: 1.5em;
+      margin-bottom: .7em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: .3s ease background;
+      width: 100%;
+      &:hover {
+        transition: .3s ease background;
+      }
+      &.signupBut {
+        background: #43a3e6;
+        border: 2px solid #43a3e6;
+        &:hover {
+          background: #fff;
+          color: #43a3e6;
+        }
+      }
+      &.loginBut {
+        background: #00a388;
+        border: 2px solid #00a388;
+        &:hover {
+          background: #fff;
+          color: #00a388;
+        }
+      }
+      &.addBut, &.editBut {
+        background:grey;
+        border: 2px solid grey;
+        &:hover {
+          background: #fff;
+          color: grey;
+        }
+      }
+    }
+  }
+  .account-message {
+    font-size: .7em;
+    text-align: center;
+  }
+}
+
+.error-message {
+  background: #F02B63;
+  box-sizing: border-box;
+  color: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  width: 100%;
 }
